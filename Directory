@@ -1,0 +1,95 @@
+package activity;//this is a a simple package whose name is "activity"
+//Simple phone directory program to add and delete contacts
+import java.util.*; //imports everythinj of util package
+
+public class Directory 		//creates a class whose name is directory
+{
+	Scanner in=new Scanner(System.in);		//To accept the input from the user
+	TreeMap<String, Long> tm=new TreeMap<String, Long>();		//To store the data in treemap ,class mapinterface
+													//tree map stores everything in ascending order of keys
+	
+	public void addContacts(	)		//to add user defined data(method)
+	{
+		System.out.print("Enter number of contacts you want to save:");
+		int no=in.nextInt()		;//to accept no. of contacts to save
+		System.out.println();
+		
+		for(int i=1; i<=no; i++)
+		{
+			System.out.print("Enter name and mobile number of person: ");
+			tm.put( in.next(), in.nextLong() );		//to add the data into treemap
+			System.out.println();
+		}
+		System.out.println(tm);
+	}
+	//
+	
+	public void searchContact()		//used to search the element
+	{
+		System.out.println("Search: ");
+		String name=in.next();		//accepts string to be searched
+		if(tm.containsKey(name))		//checks accepted string with each key 
+		{
+			System.out.println("Phone number: "+tm.get(name));	//returns the value of the associated key
+			System.out.println();
+		}
+		else		//else block will be executed if no match is found
+		{
+			System.out.println("Contact not found.");
+			System.out.println();
+		}
+	}
+	
+	public void deleteContact()
+	{
+		System.out.println("Enter name to be deleted");
+		String d_name=in.next();
+		if(tm.containsKey(d_name))
+		{
+			tm.remove(d_name);
+			System.out.println("Contact deleted successfully.\n");
+		}
+		else 
+		{
+			System.out.println("Contact not found.\n");
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);	//to accept input  from the user
+		Directory obj=new Directory();
+		
+		while(true)		//infinite loop
+		{
+			System.out.println("Options: ");
+			System.out.println("1. Add contacts");
+			System.out.println("2. Search a contact");
+			System.out.println("3.Delete contact");
+			System.out.println("4. Exit.");
+			System.out.print("Make a choice (1 - 4): ");
+			int choice=sc.nextInt();		//accepts choice of user
+			System.out.println();
+			
+			switch(choice)		//switch case matches value of "ch" with each case value
+			{
+			case 1:		//case 1 iwill be executed when ch==1
+				obj.addContacts();	//calls addContact method 
+				break;
+			case 2:			//case 2 will be executed when ch==2
+				obj.searchContact();		//calls deleteContact method
+				break;
+			case 3:
+				obj.deleteContact();
+				break;
+			case 4:			//case 3 is executed when ch==3
+				System.exit(0);//Terminates the 
+				break;
+			default:		//default block is executed if no match is found
+					System.out.println("WRONG CHOICE.\n");
+			}
+			
+		}
+		
+	}
+}
